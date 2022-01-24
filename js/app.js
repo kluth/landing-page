@@ -44,5 +44,18 @@ window.addEventListener('scroll', function () {
         headerEl === null || headerEl === void 0 ? void 0 : headerEl.classList.add('hide-header');
         var footerEl = document.querySelector("footer");
         footerEl === null || footerEl === void 0 ? void 0 : footerEl.classList.add("hide-header");
-    }, 1500);
+    }, 2500);
 }, false);
+var burgerMenu = document.querySelector('.menu-btn');
+var menuOpen = false;
+burgerMenu === null || burgerMenu === void 0 ? void 0 : burgerMenu.addEventListener('click', function () {
+    if (!menuOpen) {
+        burgerMenu.classList.add('open');
+        navigation === null || navigation === void 0 ? void 0 : navigation.classList.add('drawer');
+    }
+    else {
+        burgerMenu.classList.remove('open');
+        navigation === null || navigation === void 0 ? void 0 : navigation.classList.remove('drawer');
+    }
+    menuOpen = !menuOpen;
+});

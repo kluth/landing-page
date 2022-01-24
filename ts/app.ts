@@ -50,5 +50,18 @@ window.addEventListener('scroll', () => {
         headerEl?.classList.add('hide-header')
         let footerEl = document.querySelector("footer");
         footerEl?.classList.add("hide-header");
-    }, 1500 )
+    }, 2500 )
 }, false)
+
+const burgerMenu = document.querySelector('.menu-btn')
+let menuOpen = false
+burgerMenu?.addEventListener('click', () => {
+    if(!menuOpen) {
+        burgerMenu.classList.add('open')
+        navigation?.classList.add('drawer')
+    } else {
+        burgerMenu.classList.remove('open')
+        navigation?.classList.remove('drawer')
+    }
+    menuOpen = !menuOpen;
+})

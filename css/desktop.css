@@ -1,5 +1,14 @@
 @media screen and (min-width: 768px) {
-    #container > header > nav > ul {
-        display: flex;
-    }
+  #container > header > nav > ul {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #container > header > nav > #burger {
+    display: none;
+  }
+
+  .menu-btn {
+      display: none;
+  }
 }
