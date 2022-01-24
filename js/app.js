@@ -13,7 +13,6 @@ var sectionObserver = new IntersectionObserver(callback, options);
 var sections = document.querySelectorAll('section');
 var headlines = document.querySelectorAll('h2');
 var navigation = document.querySelector('ul');
-console.log(navigation);
 sections.forEach(function (section, index) {
     var _a, _b;
     var navItem = document.createElement('li');
@@ -31,3 +30,19 @@ var navigateTo = function (path) {
     var element = document.querySelector(path);
     element === null || element === void 0 ? void 0 : element.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 };
+var timer = null;
+window.addEventListener('scroll', function () {
+    if (timer !== null) {
+        clearTimeout(timer);
+        var headerEl = document.querySelector('header');
+        headerEl === null || headerEl === void 0 ? void 0 : headerEl.classList.remove('hide-header');
+        var footerEl = document.querySelector("footer");
+        footerEl === null || footerEl === void 0 ? void 0 : footerEl.classList.remove("hide-header");
+    }
+    timer = setTimeout(function () {
+        var headerEl = document.querySelector('header');
+        headerEl === null || headerEl === void 0 ? void 0 : headerEl.classList.add('hide-header');
+        var footerEl = document.querySelector("footer");
+        footerEl === null || footerEl === void 0 ? void 0 : footerEl.classList.add("hide-header");
+    }, 1500);
+}, false);

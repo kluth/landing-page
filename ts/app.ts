@@ -18,8 +18,6 @@ const sections = document.querySelectorAll('section')
 const headlines = document.querySelectorAll('h2')
 
 const navigation = document.querySelector('ul')
-console.log(navigation);
-
 
 sections.forEach((section, index) => {
     let navItem = document.createElement('li')
@@ -38,3 +36,19 @@ const navigateTo = (path: string) => {
     element?.scrollIntoView({block: 'nearest', behavior: 'smooth'})
 }
 
+let timer:any = null
+window.addEventListener('scroll', () => {
+    if(timer !== null) {
+        clearTimeout(timer)
+        let headerEl = document.querySelector('header')
+        headerEl?.classList.remove('hide-header')
+        let footerEl = document.querySelector("footer");
+        footerEl?.classList.remove("hide-header");
+    }
+    timer = setTimeout(() => {
+        let headerEl = document.querySelector('header')
+        headerEl?.classList.add('hide-header')
+        let footerEl = document.querySelector("footer");
+        footerEl?.classList.add("hide-header");
+    }, 1500 )
+}, false)
