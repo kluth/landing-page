@@ -1,61 +1,91 @@
-var options = {
+/**
+ * Setting options for the IntersectionObserver
+ * in an object.
+ */
+const options = {
     rootMargin: '0px',
-    threshold: 0.2
+    threshold: 0.2,
 };
-var callback = function (entries, observer) {
-    entries.forEach(function (entry) {
-        var navItem = document.querySelector("#button-".concat(entry.target.id));
-        navItem === null || navItem === void 0 ? void 0 : navItem.classList.toggle('active', entry.isIntersecting);
+/**
+ * Callback for the IntersectionObserver
+ *
+ * fires whenever the IntersectionState changes
+ * and adds or removes the active class, to highlight
+ * the current view
+ * @param entries
+ * @param observer
+ */
+const callback = (entries, observer) => {
+    entries.forEach((entry) => {
+        let navItem = document.querySelector(`#button-${entry.target.id}`);
+        navItem?.classList.toggle('active', entry.isIntersecting);
         entry.target.classList.toggle('active', entry.isIntersecting);
     });
 };
-var sectionObserver = new IntersectionObserver(callback, options);
-var sections = document.querySelectorAll('section');
-var headlines = document.querySelectorAll('h2');
-var navigation = document.querySelector('ul');
-sections.forEach(function (section, index) {
-    var _a, _b;
-    var navItem = document.createElement('li');
-    var button = document.createElement('button');
-    button.id = "button-".concat((_a = section.attributes.getNamedItem('id')) === null || _a === void 0 ? void 0 : _a.value);
+const sectionObserver = new IntersectionObserver(callback, options);
+const sections = document.querySelectorAll('section');
+const headlines = document.querySelectorAll('h2');
+const navigation = document.querySelector('ul');
+/**
+ * Adding the IntersectionObserver to
+ * every section element in the document
+ */
+sections.forEach((section, index) => {
+    let navItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.id = `button-${section.attributes.getNamedItem('id')?.value}`;
     button.innerText = headlines[index].innerText;
-    button.setAttribute('onclick', "navigateTo('#".concat((_b = section.attributes.getNamedItem('id')) === null || _b === void 0 ? void 0 : _b.value, "')"));
+    button.setAttribute('onclick', `navigateTo('#${section.attributes.getNamedItem('id')?.value}')`);
     navItem.appendChild(button);
-    navigation === null || navigation === void 0 ? void 0 : navigation.appendChild(navItem);
+    navigation?.appendChild(navItem);
     sectionObserver.observe(section);
 });
-var navigateTo = function (path) {
-    var _a;
-    (_a = window.event) === null || _a === void 0 ? void 0 : _a.preventDefault();
-    var element = document.querySelector(path);
-    element === null || element === void 0 ? void 0 : element.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+/**
+ * Programmatically navigate to a
+ * given anchor on the page
+ *
+ * @description Paths navigate to
+ * @param path
+ */
+const navigateTo = (path) => {
+    window.event?.preventDefault();
+    let element = document.querySelector(path);
+    element?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 };
-var timer = null;
-window.addEventListener('scroll', function () {
+/**
+ * Hide the navbar and the footer
+ * after 2.5s if there is no scrolling
+ */
+let timer = null;
+window.addEventListener('scroll', () => {
     if (timer !== null) {
         clearTimeout(timer);
-        var headerEl = document.querySelector('header');
-        headerEl === null || headerEl === void 0 ? void 0 : headerEl.classList.remove('hide-header');
-        var footerEl = document.querySelector("footer");
-        footerEl === null || footerEl === void 0 ? void 0 : footerEl.classList.remove("hide-header");
+        let headerEl = document.querySelector('header');
+        headerEl?.classList.remove('hide-header');
+        let footerEl = document.querySelector("footer");
+        footerEl?.classList.remove("hide-header");
     }
-    timer = setTimeout(function () {
-        var headerEl = document.querySelector('header');
-        headerEl === null || headerEl === void 0 ? void 0 : headerEl.classList.add('hide-header');
-        var footerEl = document.querySelector("footer");
-        footerEl === null || footerEl === void 0 ? void 0 : footerEl.classList.add("hide-header");
+    timer = setTimeout(() => {
+        let headerEl = document.querySelector('header');
+        headerEl?.classList.add('hide-header');
+        let footerEl = document.querySelector("footer");
+        footerEl?.classList.add("hide-header");
     }, 2500);
 }, false);
-var burgerMenu = document.querySelector('.menu-btn');
-var menuOpen = false;
-burgerMenu === null || burgerMenu === void 0 ? void 0 : burgerMenu.addEventListener('click', function () {
+/**
+ * Opens the mobile menu,
+ * if burger button is clicked
+ */
+const burgerMenu = document.querySelector('.menu-btn');
+let menuOpen = false;
+burgerMenu?.addEventListener('click', () => {
     if (!menuOpen) {
         burgerMenu.classList.add('open');
-        navigation === null || navigation === void 0 ? void 0 : navigation.classList.add('drawer');
+        navigation?.classList.add('drawer');
     }
     else {
         burgerMenu.classList.remove('open');
-        navigation === null || navigation === void 0 ? void 0 : navigation.classList.remove('drawer');
+        navigation?.classList.remove('drawer');
     }
     menuOpen = !menuOpen;
 });

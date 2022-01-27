@@ -1,0 +1,8 @@
+{
+    "comment-ts.authorName": "Matthias Kluth",
+    "comment-ts.includeAuthorTag": true,
+    "comment-ts.includeDescriptionTag": true,
+    "comment-ts.parseNames": true,
+    "comment-ts.todoComments": true,
+    "comment-ts.scoped": true
+}
